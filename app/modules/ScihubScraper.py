@@ -13,8 +13,12 @@ def download_papers(results, download_dir='papers'):
         if title:
             try:
                 filepath = f"{download_dir}/{title[:100].strip().replace('/', '-')}.pdf"
-                scihub_download(title, paper_type="title", out=filepath)
-                downloaded.append(filepath)
+                if os.path.exists(filepath):
+                    downloaded.append(filepath)
+                else:
+                    scihub_download(title, paper_type="title", out=filepath)
+                    if os.path.exists(filepath):
+                        downloaded.append(filepath)
             except Exception as e:
                 print(f"Failed to download '{title}': {e}")
     return downloaded
