@@ -53,7 +53,7 @@ edit_message = true
 
 [UI]
 # Name of the assistant.
-name = "Assistant"
+name = "PapersPlease"
 
 # default_theme = "dark"
 
@@ -80,6 +80,11 @@ cot = "full"
 # This can be used to customize the frontend code.
 # Be careful: If this is a relative path, it should not start with a slash.
 # custom_build = "./public/build"
+
+login_page_image = "/public/background.gif"
+
+login_page_image_filter = "brightness-50 grayscale"
+login_page_image_dark_filter = "contrast-200 blur-sm"
 
 # Specify optional one or more custom links in the header.
 # [[UI.header_links]]

@@ -12,17 +12,17 @@ def search_google_scholar(query, pages=1):
 
     for page in range(pages):
         start = page * 10
+        query=query.replace(" ","+")
         url = f"https://scholar.google.com/scholar?start={start}&q={query}&hl=en&as_sdt=0,5"
 
         try:
             response = requests.get(url, headers=headers)
             soup = BeautifulSoup(response.text, 'html.parser')
-
+            
             for item in soup.select('.gs_ri'):
                 title_elem = item.select_one('.gs_rt')
                 title = title_elem.text
                 link = title_elem.a['href'] if title_elem.a else None
-
                 doi = None
                 if link and 'doi.org' in link:
                     doi = link.split('doi.org/')[-1]
@@ -43,9 +43,11 @@ def search_google_scholar(query, pages=1):
                     'cited_by': cited_by,
                     'page': page + 1
                 })
+                
+                
 
         except Exception as e:
             print(f"Error: {e}")
             break
-
+    
     return all_results
